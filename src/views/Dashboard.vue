@@ -1,7 +1,7 @@
 <template>
     <div class="dashboard">
         <div class="container">
-            <div class="row m-0 border">
+            <div class="row m-0">
                 <SumarryVotes></SumarryVotes>
             </div>
         </div>
