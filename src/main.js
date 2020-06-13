@@ -23,6 +23,7 @@ import PortalVue from 'portal-vue'
 Vue.use(PortalVue)
 /* FIN INSTALACION PORTAL VUE */
 
+
 Vue.config.productionTip = false
 
 new Vue({
