@@ -2,10 +2,10 @@
   <div class="sumarry">
       <div class="col-12 row m-0">
           <div class="col-12 col-sm-12 col-md-12 col-lg-3">
-              lol jajajajaja
+              <ListVote></ListVote>
           </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-9">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ducimus iste expedita aperiam eos saepe voluptatibus distinctio quos quas, vero, laborum animi adipisci dolores incidunt eligendi est repudiandae accusantium a?
+              <GraphVote></GraphVote>
           </div>
           
       </div>
@@ -13,10 +13,15 @@
 </template>
 
 <script>
+import ListVote from './ListVote.vue'
+import GraphVote from './GraphVote.vue'
+
+
 export default {
     name:'SumarryVotes',
     components:{
-
+        ListVote,
+        GraphVote
     },data:function(){
         return{
 
