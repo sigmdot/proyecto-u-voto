@@ -1,6 +1,6 @@
 <template>
   <div class="listamisvotaciones">
-
+    JAJAJ
   </div>
 </template>
 
