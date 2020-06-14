@@ -1,21 +1,31 @@
 <template>
   <div class="listvote">
     <ul class="list-group">
-      <li class="list-group-item bg-primary">Votactión 1</li>
-      <li class="list-group-item">Votación 2</li>
-      <li class="list-group-item">Votación 3</li>
-      <li class="list-group-item">Votación 4</li>
-
+     <ListItemVote v-for="index in 5" :key="index"  v-bind:class="{ 'bg-primary' : seleccionado == index }" @seleccionado="seleccionarPadre(index)"></ListItemVote>
     </ul>
+    
   </div>
 </template>
 
 <script>
+import ListItemVote from './ListItemVote.vue'
+
 export default {
   name: "ListVote",
-  components: {},
+  components: {
+    ListItemVote
+  },
   data: function() {
-    return {};
+    return {
+      seleccionado:1
+    };
+  },
+  methods:{
+    seleccionarPadre:function(index){
+      this.seleccionado = index;
+      this.$emit('seleccionadoDato',index);
+      console.log(index);
+    }
   }
 };
 </script>
