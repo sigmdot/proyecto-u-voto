@@ -1,6 +1,8 @@
 <template>
     <div class="dashboard">
         <div class="container">
+            <h3>Mis votaciones actuales</h3>
+            <hr>
             <div class="row m-0">
                 <SumarryVotes></SumarryVotes>
             </div>
