@@ -22,13 +22,13 @@
         </select>
         </div>
         <div class="row m-0 col-12 col-sm-6 col-md-3 col-lg my-1 mr-sm-2">
-        <label class="mr-1"  for="inlineFormInputGroupUsername2">Fecha de Inicio:</label>
+        <!-- <label class="mr-1"  for="inlineFormInputGroupUsername2">Fecha de Inicio:</label>
         <select class="custom-select my-1" id="inlineFormCustomSelectPref">
           <option selected>Elige...</option>
           <option value="1">19 de Enero</option>
           <option value="2">25 de Mayo</option>
           <option value="2">22 de Junio</option>
-        </select>
+        </select> -->
         </div>
         <div class="row m-0 col-12 col-sm-6 col-md-3 col-lg my-1 mr-sm-2">
         <label class="mr-1"  for="inlineFormInputName2">Estado de votacion:</label>
@@ -40,7 +40,7 @@
         </select>
         </div>
 
-        <!-- <button type="submit" class="btn btn-primary mb-2">Submit</button> -->
+        <button type="submit" class="btn btn-primary mb-2">Filtrar</button>
       </form>
     </div>
   </div>
