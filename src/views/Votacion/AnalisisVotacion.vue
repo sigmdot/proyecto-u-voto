@@ -1,6 +1,10 @@
 <template>
  <div class="analisisvotaciones">
-     
+     <div class="container">
+         <div class="row m-0">
+             
+         </div>
+     </div>
  </div>
 </template>
 <script>

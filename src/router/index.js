@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Dashboard from '../views/Dashboard.vue'
 import MisVotaciones from '../views/MisVotaciones.vue'
+import AnalisisVotacion from '../views/Votacion/AnalisisVotacion.vue'
 
 Vue.use(VueRouter)
 
@@ -20,6 +21,12 @@ Vue.use(VueRouter)
     path:'/misvotaciones',
     name:'Mis votaciones',
     component: MisVotaciones
+  },
+  /* EDITAR DPS */
+  {
+    path:'/analisisPrueba',
+    name:'Analisis votación',
+    component: AnalisisVotacion
   }
 ]
 
