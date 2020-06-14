@@ -2,7 +2,7 @@
   <div class="sumarry container-fluid px-0">
       <div class="row m-0">
           <div class="col-12 col-sm-12 col-md-12 col-lg-3 p-0">
-              <ListVote></ListVote>
+              <ListVote @seleccionadoDato="seleccionado"></ListVote>
           </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-9 p-0">
               <GraphVote></GraphVote>
@@ -24,7 +24,13 @@ export default {
         GraphVote
     },data:function(){
         return{
-
+            index:null
+        }
+    },methods:{
+        seleccionado(index){
+            this.index= index;
+            console.log('el index fue',this.index);
+            
         }
     }
 }
