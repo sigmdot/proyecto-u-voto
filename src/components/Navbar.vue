@@ -24,7 +24,8 @@
                 <router-link to="/dashboard">Dashboard</router-link>
               </b-nav-item>
               <b-nav-item href="#">
-                <b-icon icon="receipt-cutoff"></b-icon>Mis votaciones
+                <b-icon icon="receipt-cutoff"></b-icon>
+                <router-link to="/misvotaciones">Mis votaciones</router-link>
               </b-nav-item>
               <b-nav-item>
                 <a class="btn btn-secondary btn-sm">Login</a>
@@ -36,26 +37,17 @@
           </b-collapse>
         </div>
       </div>
-
-      <!-- Right aligned nav items -->
       <div class="right ml-auto">
         <b-navbar-nav>
           <b-nav-form class="is-hidden-mobile">
             <b-button size="sm" class="my-2 my-sm-0" type="submit">Crear votación</b-button>
           </b-nav-form>
-          <!-- <b-nav-item-dropdown right>
-            <template v-slot:button-content>
-              <em>{{Usuario}}</em>
-            </template>
-            <b-dropdown-item href="#"> <b-icon icon="person-circle"></b-icon> Perfil</b-dropdown-item>
-            <b-dropdown-item href="#"> <b-icon icon="box-arrow-in-left"></b-icon> Salir</b-dropdown-item>
-          </b-nav-item-dropdown>-->
           <div class="user-nav" v-if="Usuario">
             <b-nav-item-dropdown :text="Usuario" right>
-              <b-dropdown-item fixed='top' href="#">
+              <b-dropdown-item fixed="top" href="#">
                 <b-icon icon="person-circle"></b-icon>Perfil
               </b-dropdown-item>
-              <b-dropdown-item fixed='top' href="#">
+              <b-dropdown-item fixed="top" href="#">
                 <b-icon icon="box-arrow-in-left"></b-icon>Salir
               </b-dropdown-item>
             </b-nav-item-dropdown>
