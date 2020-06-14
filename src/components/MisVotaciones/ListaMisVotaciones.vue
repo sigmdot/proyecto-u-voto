@@ -17,9 +17,11 @@
       <div class="is-hidden-pc">
           <h4>Votaciones</h4>
           <div class="row m-0">
-            <div class="col-md-12 col-sm 12 col-12 shadow">
-              jajaaj
-            </div>
+            <VotacionItemMobile></VotacionItemMobile>
+            <VotacionItemMobile></VotacionItemMobile>
+            <VotacionItemMobile></VotacionItemMobile>
+            <VotacionItemMobile></VotacionItemMobile>
+
           </div>
         </div>
     
@@ -29,12 +31,14 @@
 <script>
 import HeaderLista from './HeaderLista.vue'
 import VotacionItemPC from './VotacionItemPC.vue'
+import VotacionItemMobile from './VotacionItemMb.vue'
 
 export default {
     name:'ListaMisVotaciones',
     components:{
       HeaderLista,
-      VotacionItemPC
+      VotacionItemPC,
+      VotacionItemMobile
     },
     data:function(){
         return{
