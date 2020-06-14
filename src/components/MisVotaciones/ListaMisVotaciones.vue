@@ -4,7 +4,13 @@
       <div class="is-hidden-mobile">
         <HeaderLista></HeaderLista>
         <div class="row m-0">
-          
+          <VotacionItemPC></VotacionItemPC>
+          <VotacionItemPC></VotacionItemPC>
+          <VotacionItemPC></VotacionItemPC>
+          <VotacionItemPC></VotacionItemPC>
+          <VotacionItemPC></VotacionItemPC>
+          <VotacionItemPC></VotacionItemPC>
+          <VotacionItemPC></VotacionItemPC>
         </div>
       </div>
     
@@ -13,10 +19,13 @@
 
 <script>
 import HeaderLista from './HeaderLista.vue'
+import VotacionItemPC from './VotacionItemPC.vue'
+
 export default {
     name:'ListaMisVotaciones',
     components:{
-      HeaderLista
+      HeaderLista,
+      VotacionItemPC
     },
     data:function(){
         return{
