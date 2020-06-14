@@ -8,7 +8,7 @@
                 <h5>{{nombreVotacion}}</h5>
             </div>
             <div class="col-12">
-            <span class="text-info">Ultima fecha modificación: 12 de junio del 200x</span>
+            <span class="text-info">Ultima fecha modificación: {{fechaUltimaModificacion}}</span>
         </div>
         </div>
         <div class="col-2">
@@ -26,7 +26,8 @@ export default {
     data:function(){
         return{
             nombreVotacion:'Elecciones CEE 200x',
-            cantidadVoto:99
+            cantidadVoto:99,
+            fechaUltimaModificacion:Date(Date.parse("12/01/2000"))
         }
     }
 }
