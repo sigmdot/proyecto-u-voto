@@ -1,5 +1,5 @@
 <template>
-  <div class="ultimosresultados col-12 col-sm-12 col-md-5 col-lg-3 border row p-0 m-0 mb-1">
+  <div class="ultimosresultados col-12 col-sm-12 col-md-5 col-lg-3 border row p-0 m-0 mb-1 shadow">
     <div class="col-12 border-bottom text-center">
       <h4>Nombre votación</h4>
     </div>
