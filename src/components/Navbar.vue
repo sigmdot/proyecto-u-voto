@@ -1,7 +1,7 @@
 <template>
   <div class="navbar-app">
     <b-navbar toggleable="lg" class="color-navbar" type="dark" fixed="top">
-      <b-navbar-brand class="is-hidden-mobile" href="#">Voto icon 404</b-navbar-brand>
+      <b-navbar-brand class="is-hidden-mobile mouseoverja" @click="toHome">DigiVote</b-navbar-brand>
       <div class="left">
         <div class="is-hidden-mobile">
           <b-navbar-nav class="mr-auto">
@@ -70,6 +70,11 @@ export default {
     return {
       Usuario: null
     };
+  },
+  methods:{
+    toHome(){
+      this.$router.push({ path: '/' })
+    }
   }
 };
 </script>
@@ -93,5 +98,8 @@ export default {
 }
 .hover-effect:hover {
   transform: scale(1.2, 1.2) !important;
+}
+.mouseoverja:hover{
+  cursor: pointer;
 }
 </style>
