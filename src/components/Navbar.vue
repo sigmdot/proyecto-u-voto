@@ -27,10 +27,10 @@
                 <b-icon icon="receipt-cutoff"></b-icon>
                 <router-link to="/misvotaciones">Mis votaciones</router-link>
               </b-nav-item>
-              <b-nav-item>
+              <b-nav-item v-if="!Usuario">
                 <a class="btn btn-secondary btn-sm">Login</a>
               </b-nav-item>
-              <b-nav-item>
+              <b-nav-item v-if="!Usuario">
                 <a class="btn btn-primary btn-sm">Registrarse</a>
               </b-nav-item>
             </b-navbar-nav>
@@ -40,7 +40,7 @@
       <div class="right ml-auto">
         <b-navbar-nav>
           <b-nav-form class="is-hidden-mobile">
-            <b-button size="sm" class="my-2 my-sm-0" type="submit">Crear votación</b-button>
+            <b-button v-if="Usuario" size="sm" class="my-2 my-sm-0" type="submit">Crear votación</b-button>
           </b-nav-form>
           <div class="user-nav" v-if="Usuario">
             <b-nav-item-dropdown :text="Usuario" right>
@@ -51,6 +51,10 @@
                 <b-icon icon="box-arrow-in-left"></b-icon>Salir
               </b-dropdown-item>
             </b-nav-item-dropdown>
+          </div>
+          <div v-else class="user-buttons">
+            <button type="button" class="btn btn-primary mr-1">Registrarse</button>
+            <button type="button" class="btn btn-secondary">Entrar</button>
           </div>
         </b-navbar-nav>
       </div>
@@ -64,7 +68,7 @@ export default {
   components: {},
   data: function() {
     return {
-      Usuario: "Prueba User"
+      Usuario: null
     };
   }
 };
