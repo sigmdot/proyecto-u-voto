@@ -68,7 +68,7 @@ export default {
   components: {},
   data: function() {
     return {
-      Usuario: null
+      Usuario: 'Prueba'
     };
   },
   methods:{
