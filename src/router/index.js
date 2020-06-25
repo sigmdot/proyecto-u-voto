@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 import Dashboard from '../views/Dashboard.vue'
 import MisVotaciones from '../views/MisVotaciones.vue'
 import AnalisisVotacion from '../views/Votacion/AnalisisVotacion.vue'
+import Login from '../views/User/Login.vue'
+import Register from '../views/User/Register.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +29,16 @@ Vue.use(VueRouter)
     path:'/analisisPrueba',
     name:'Analisis votación',
     component: AnalisisVotacion
+  },
+  {
+    path:'/login',
+    name:'Login',
+    component: Login
+  },
+  {
+    path:'/registro',
+    name:'Registro',
+    component: Register
   }
 ]
 
