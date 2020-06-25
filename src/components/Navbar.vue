@@ -5,10 +5,10 @@
       <div class="left">
         <div class="is-hidden-mobile">
           <b-navbar-nav class="mr-auto">
-            <b-nav-item class="hover-effect">
+            <b-nav-item class="hover-effect" v-if="Usuario">
               <router-link class="color-link" to="/dashboard">Dashboard</router-link>
             </b-nav-item>
-            <b-nav-item class="hover-effect">
+            <b-nav-item class="hover-effect" v-if="Usuario">
               <router-link class="color-link" to="/misvotaciones">Mis votaciones</router-link>
             </b-nav-item>
             <b-nav-item></b-nav-item>
@@ -19,11 +19,11 @@
           <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
           <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav>
-              <b-nav-item>
+              <b-nav-item v-if="Usuario">
                 <b-icon icon="kanban-fill" rotate="270"></b-icon>
                 <router-link to="/dashboard">Dashboard</router-link>
               </b-nav-item>
-              <b-nav-item href="#">
+              <b-nav-item v-if="Usuario">
                 <b-icon icon="receipt-cutoff"></b-icon>
                 <router-link to="/misvotaciones">Mis votaciones</router-link>
               </b-nav-item>
