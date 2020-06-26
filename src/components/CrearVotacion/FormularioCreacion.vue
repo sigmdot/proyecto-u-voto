@@ -8,6 +8,7 @@
           class="form-control"
           id="nombrevotacion"
           aria-describedby="nombrevotacionhelp"
+          v-model="nombrevotacion"
         />
         <small
           id="emailHelp"
@@ -16,10 +17,10 @@
       </div>
 
       <div class="form-group">
-        <label for="exampleFormControlSelect1">Tipo de elección:</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>Privada</option>
-          <option>Pública</option>
+        <label for="exampleFormControlSelect1" >Tipo de elección:</label>
+        <select class="form-control" id="exampleFormControlSelect1" v-model="tipo">
+          <option value="private">Privada</option>
+          <option value="public">Pública</option>
         </select>
       </div>
       <h4>Preguntas</h4>
@@ -32,7 +33,7 @@
         </div>
       </div>
 
-      <div v-for="(pregunta,i) in preguntas" class="form-group border rounded p-3" :key="i">
+      <div v-for="(pregunta,i) in preguntas" class="form-group border rounded p-3 bg-light" :key="i">
         <label>{{pregunta.nombre}}</label>
         <div
           v-for="(respuesta,j) in pregunta.respuestas"
@@ -48,6 +49,7 @@
           />
           <label class="custom-control-label" for="customRadio1">{{respuesta}}</label>
         </div>
+        <div class="btn btn-outline-danger w-100 mt-1 w-100" @click="borrarpregunta(i)">Borrar pregunta</div>
       </div>
       <button type="submit" class="btn btn-primary w-100">Crear votación</button>
     </form>
@@ -65,7 +67,9 @@ export default {
   },
   data: function() {
     return {
-      preguntas: []
+      preguntas: [],
+      tipo:null,
+      nombrevotacion:null
     };
   },
   methods: {
@@ -75,8 +79,14 @@ export default {
     hideModal() {
       this.$refs["my-modal"].hide();
     },
-    checkForm() {
-      console.log("EHH");
+    checkForm(e) {
+      if(this.nombrevotacion && (this.preguntas.length != 0) && this.tipo){
+        this.$emit('votacion',this.nombrevotacion,this.tipo,this.preguntas);
+        this.nombrevotacion = null;
+        this.preguntas = [];
+        this.tipo = null;
+      }
+      e.preventDefault();
     },
     preguntaCaptada(respuestas, nombrePregunta) {
       const pregunta = {
@@ -84,6 +94,9 @@ export default {
         respuestas: respuestas
       };
       this.preguntas.push(pregunta);
+    },
+    borrarpregunta(index){
+      this.preguntas.splice(index,1);
     }
   }
 };
