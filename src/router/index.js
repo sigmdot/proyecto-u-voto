@@ -6,7 +6,7 @@ import MisVotaciones from '../views/MisVotaciones.vue'
 import AnalisisVotacion from '../views/Votacion/AnalisisVotacion.vue'
 import Login from '../views/User/Login.vue'
 import Register from '../views/User/Register.vue'
-
+import CrearVotacion from '../views/CrearVotacion.vue'
 Vue.use(VueRouter)
 
   const routes = [
@@ -39,6 +39,11 @@ Vue.use(VueRouter)
     path:'/registro',
     name:'Registro',
     component: Register
+  },
+  {
+    path:'/crearvotacion',
+    name:'CrearVotacion',
+    component: CrearVotacion
   }
 ]
 

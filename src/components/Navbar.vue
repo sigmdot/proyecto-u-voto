@@ -40,7 +40,7 @@
       <div class="right ml-auto">
         <b-navbar-nav>
           <b-nav-form class="is-hidden-mobile">
-            <b-button v-if="Usuario" size="sm" class="my-2 my-sm-0" type="submit">Crear votación</b-button>
+            <router-link class="color-link" to="/crearvotacion"><b-button v-if="Usuario" size="sm" class="my-2 my-sm-0" type="submit">Crear votación</b-button></router-link>
           </b-nav-form>
           <div class="user-nav" v-if="Usuario">
             <b-nav-item-dropdown :text="Usuario" right>
@@ -73,7 +73,7 @@ export default {
   },
   methods:{
     toHome(){
-      this.$router.push({ path: '/' })
+      this.$router.push({ path: '/' });
     }
   }
 };
