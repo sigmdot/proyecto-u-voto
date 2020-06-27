@@ -112,7 +112,7 @@ export default {
         this.boolpass &&
         this.rut
       ) {
-        return true;
+        this.$emit('datosRegistro',this.nombres,this.apellidos,this.correo,this.pass,this.rut);
       }
       this.errors = [];
       if (!this.nombres) {
