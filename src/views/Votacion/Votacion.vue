@@ -10,20 +10,24 @@
           <label>
             <strong>{{pregunta.nombre}}</strong>
           </label>
-          <b-form-radio   v-for="(resp,j) in pregunta.respuesta" :key="j" v-model="selected" v-bind:name="pregunta.nombre" v-bind:value="resp">{{resp}}</b-form-radio>
+          <b-form-radio   v-for="(resp,j) in pregunta.respuesta" :key="j"  v-bind:name="pregunta.nombre" v-bind:value="resp">{{resp}}</b-form-radio>
         </div>
       </form>
     </div>
+    <button class="btn btn-primary" type="button" v-b-modal.modal-1> Abrir validación </button>
+    <CarnetVali></CarnetVali>
   </div>
 </template>
 
 <script>
 import Preguntas from "@/components/Votacion/Preguntas.vue";
+import CarnetVali from '@/components/Votacion/CarnetVali.vue'
 
 export default {
   name: "VotacionView",
   components: {
-    Preguntas
+    Preguntas,
+    CarnetVali
   },
   data: function() {
     return {
