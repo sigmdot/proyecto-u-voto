@@ -3,7 +3,6 @@
     <div class="row m-0">
         <div class="col p-0">
             <button type="button" class="btn btn-outline-dark w-100"> Ingresar por link</button>
-            <button type="button" class="btn btn-outline-dark w-100"> Ingresar por link</button>
         </div>
     </div>
   </b-modal>

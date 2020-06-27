@@ -7,6 +7,8 @@ import AnalisisVotacion from '../views/Votacion/AnalisisVotacion.vue'
 import Login from '../views/User/Login.vue'
 import Register from '../views/User/Register.vue'
 import CrearVotacion from '../views/CrearVotacion.vue'
+import VotacionView from '../views/Votacion/Votacion.vue'
+
 Vue.use(VueRouter)
 
   const routes = [
@@ -44,6 +46,11 @@ Vue.use(VueRouter)
     path:'/crearvotacion',
     name:'CrearVotacion',
     component: CrearVotacion
+  },
+  {
+    path:'/votar',
+    name:'Vota!',
+    component:VotacionView
   }
 ]
 
