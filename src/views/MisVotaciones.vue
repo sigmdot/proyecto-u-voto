@@ -8,7 +8,6 @@
                 <ListaMisVotaciones></ListaMisVotaciones>
             </div>
         </div>
-        
     </div>
 </template>
 

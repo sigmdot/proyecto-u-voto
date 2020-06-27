@@ -15,6 +15,8 @@
         </div>
       </div>
     </div>
+         <router-link to="/votar"><button type="button" class="btn btn-primary"> AAA </button></router-link> 
+
   </div>
 </template>
 
