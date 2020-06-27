@@ -34,7 +34,7 @@
       </div>
 
       <div v-for="(pregunta,i) in preguntas" class="form-group border rounded p-3 bg-light" :key="i">
-        <label>{{pregunta.nombre}}</label>
+        <label> <strong> {{pregunta.nombre}} </strong> </label>
         <div
           v-for="(respuesta,j) in pregunta.respuestas"
           :key="j"
@@ -47,9 +47,9 @@
             class="custom-control-input"
             disabled
           />
-          <label class="custom-control-label" for="customRadio1">{{respuesta}}</label>
+          <label class="custom-control-label" for="customRadio1"> {{respuesta}}</label>
         </div>
-        <div class="btn btn-outline-danger w-100 mt-1 w-100" @click="borrarpregunta(i)">Borrar pregunta</div>
+        <div class="btn btn-outline-danger w-100 mt-3 w-100" @click="borrarpregunta(i)">Borrar pregunta</div>
       </div>
       <button type="submit" class="btn btn-primary w-100">Crear votación</button>
     </form>
