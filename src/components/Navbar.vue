@@ -40,7 +40,7 @@
       <div class="right ml-auto">
         <b-navbar-nav>
           <b-nav-form class="is-hidden-mobile">
-            <button type="button" class="btn btn-success btn-sm mr-1" v-b-modal.modalvotacion>Ingresar votación</button>
+            <button type="button" class="btn btn-success btn-sm mr-1" v-if="Usuario" v-b-modal.modalvotacion>Ingresar votación</button>
             <router-link class="color-link" to="/crearvotacion"><b-button v-if="Usuario" size="sm" class="my-2 my-sm-0" type="submit">Crear votación</b-button></router-link>
           </b-nav-form>
           <div class="user-nav" v-if="Usuario">
