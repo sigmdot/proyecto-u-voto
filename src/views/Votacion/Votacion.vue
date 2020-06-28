@@ -14,7 +14,6 @@
         </div>
       </form>
     </div>
-    <button class="btn btn-primary" type="button" v-b-modal.modal-1> Abrir validación </button>
     <CarnetVali></CarnetVali>
   </div>
 </template>
@@ -46,9 +45,22 @@ export default {
             nombre: "Pregunta 3",
             respuesta: ["eje 1", "eje 2", "eje 3"]
           }
-        ]
+        ],
+        tipo:'private'
       }
     };
+  },
+  methods:{
+
+    mostrarModalValidacion(){
+      if(this.votacion.tipo === 'private'){
+        this.$bvModal.show('validar');
+      }  
+    }
+
+  },
+  mounted:function(){
+    this.mostrarModalValidacion();
   }
 };
 </script>

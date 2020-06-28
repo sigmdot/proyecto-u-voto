@@ -1,5 +1,8 @@
 <template>
-  <b-modal id="modal-1" title="BootstrapVue">
+  <b-modal id="validar" no-close-on-esc no-close-on-backdrop>
+    <template v-slot:modal-header>
+      <h5>Para votar, porfavor validate</h5>
+    </template>
     <qrcode-stream @decode="onDecode" @init="onInit"></qrcode-stream>
     Leido = {{decode}}
   </b-modal>
