@@ -8,6 +8,7 @@ import Login from '../views/User/Login.vue'
 import Register from '../views/User/Register.vue'
 import CrearVotacion from '../views/CrearVotacion.vue'
 import VotacionView from '../views/Votacion/Votacion.vue'
+import ResultadoVotacion from '../views/Votacion/ResultadoVotacion.vue'
 
 Vue.use(VueRouter)
 
@@ -49,9 +50,14 @@ Vue.use(VueRouter)
   },
   {
     path:'/votar',
-    name:'Vota!',
+    name:'Vota',
     component:VotacionView
-  }
+  },
+  {
+    path: '/resultados',
+    name: 'Resultados',
+    component: ResultadoVotacion
+  },
 ]
 
 const router = new VueRouter({
