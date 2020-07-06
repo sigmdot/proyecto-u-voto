@@ -16,13 +16,13 @@
         >Ejemplo : Elección panes estudiantiles 2020</small>
       </div>
 
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="exampleFormControlSelect1" >Tipo de elección:</label>
         <select class="form-control" id="exampleFormControlSelect1" v-model="tipo">
           <option value="private">Privada</option>
           <option value="public">Pública</option>
         </select>
-      </div>
+      </div> -->
       <h4>Preguntas</h4>
       <div class="row m-0">
         <div class="btn btn-secondary col-4 col-md-1 col-lg-1 p-1 mb-3" v-b-modal.my-modal>
@@ -51,7 +51,7 @@
         </div>
         <div class="btn btn-outline-danger w-100 mt-3 w-100" @click="borrarpregunta(i)">Borrar pregunta</div>
       </div>
-      <button type="submit" class="btn btn-primary w-100">Crear votación</button>
+      <button type="submit" class="btn btn-primary w-100" @click="logCrear">Crear votación</button>
     </form>
     <ModalAgregar id="my-modal" @preguntacompleta="preguntaCaptada"></ModalAgregar>
   </div>
@@ -68,11 +68,16 @@ export default {
   data: function() {
     return {
       preguntas: [],
-      tipo:null,
+      tipo:'privada',
       nombrevotacion:null
     };
   },
   methods: {
+    logCrear(){
+      console.log(this.preguntas)
+      console.log(this.tipo)
+      console.log(this.nombrevotacion)
+    },
     showModal() {
       this.$refs["my-modal"].show();
     },
@@ -84,7 +89,7 @@ export default {
         this.$emit('votacion',this.nombrevotacion,this.tipo,this.preguntas);
         this.nombrevotacion = null;
         this.preguntas = [];
-        this.tipo = null;
+        // this.tipo = null;
       }
       e.preventDefault();
     },

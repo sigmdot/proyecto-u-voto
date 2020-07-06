@@ -9,14 +9,12 @@
         <img src="https://i.ibb.co/7zWFh7x/elecciones-peso-peso.jpg" class="img-thumbnail imgsrc" />
       </div>
       <div class="col-12 p-3 row m-0 justify-content-center marginpcnegativo max-imo-cnt">
-        <div class="col-10 col-lg-4 p-3 row m-0 justify-content-center border">
-          <button type="button" class="btn btn-primary col-4 mr-1 max-imo">Crear votación</button>
-          <button type="button" class="btn btn-secondary col-4 max-imo">Unirse votación</button>
+        <div class="col-10 col-lg-4 col-sm-10 p-3 row m-0 justify-content-center border">
+          <router-link to="crearvotacion"><button type="button" class="btn btn-primary  mr-1 max-imo" >Crear votación</button></router-link> 
+          <button type="button" class="btn btn-secondary  max-imo" v-b-modal.modalvotacion>Unirse votación</button>
         </div>
       </div>
     </div>
-         <router-link to="/votar"><button type="button" class="btn btn-primary"> AAA </button></router-link> 
-
   </div>
 </template>
 
@@ -24,7 +22,9 @@
 // @ is an alias to /src
 /* import HelloWorld from '@/components/HelloWorld.vue' */
 
+    
 export default {
+
   name: "Home",
   components: {}
 };

@@ -1,54 +1,54 @@
 <template>
   <div class="navbar-app">
     <b-navbar toggleable="lg" class="color-navbar" type="dark" fixed="top">
-      <b-navbar-brand class="is-hidden-mobile mouseoverja" @click="toHome">DigiVote</b-navbar-brand>
+      <router-link to="/"><b-navbar-brand class="is-hidden-mobile mouseoverja" >DigiVote</b-navbar-brand></router-link> 
       <div class="left">
         <div class="is-hidden-mobile">
-          <b-navbar-nav class="mr-auto">
-            <b-nav-item class="hover-effect" v-if="Usuario">
+          <!-- <b-navbar-nav class="mr-auto">
+            <b-nav-item class="hover-effect" v-if="loggedIn">
               <router-link class="color-link" to="/dashboard">Dashboard</router-link>
             </b-nav-item>
-            <b-nav-item class="hover-effect" v-if="Usuario">
+            <b-nav-item class="hover-effect" v-if="loggedIn">
               <router-link class="color-link" to="/misvotaciones">Mis votaciones</router-link>
             </b-nav-item>
             <b-nav-item></b-nav-item>
-          </b-navbar-nav>
+          </b-navbar-nav> -->
         </div>
         <div class="is-hidden-pc">
           <!-- <b-navbar-brand href="#"></b-navbar-brand> Cuando se tenga el logo en chico-->
           <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
           <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav>
-              <b-nav-item v-if="Usuario">
+              <!-- <b-nav-item v-if="loggedIn">
                 <b-icon icon="kanban-fill" rotate="270"></b-icon>
                 <router-link to="/dashboard">Dashboard</router-link>
               </b-nav-item>
-              <b-nav-item v-if="Usuario">
+              <b-nav-item v-if="loggedIn">
                 <b-icon icon="receipt-cutoff"></b-icon>
                 <router-link to="/misvotaciones">Mis votaciones</router-link>
+              </b-nav-item> -->
+              <!-- <b-nav-item v-if="!loggedIn">
+                <router-link  to="/login"><a class="btn btn-secondary btn-sm">Entrar</a></router-link>
               </b-nav-item>
-              <b-nav-item v-if="!Usuario">
-                <router-link class="color-link" to="/login"><a class="btn btn-secondary btn-sm">Entrar</a></router-link>
-              </b-nav-item>
-              <b-nav-item v-if="!Usuario">
-                <router-link class="color-link" to="/registro"><a class="btn btn-primary btn-sm">Registrarse</a></router-link>
-              </b-nav-item>
+              <b-nav-item v-if="!loggedIn">
+                <router-link  to="/registro"><a class="btn btn-primary btn-sm">Registrarse</a></router-link>
+              </b-nav-item> -->
             </b-navbar-nav>
           </b-collapse>
         </div>
       </div>
       <div class="right ml-auto">
         <b-navbar-nav>
-          <b-nav-form class="is-hidden-mobile">
-            <button type="button" class="btn btn-success btn-sm mr-1" v-if="Usuario" v-b-modal.modalvotacion>Ingresar votación</button>
-            <router-link class="color-link" to="/crearvotacion"><b-button v-if="Usuario" size="sm" class="my-2 my-sm-0" type="submit">Crear votación</b-button></router-link>
+          <b-nav-form >
+            <button type="button" class="btn btn-success btn-sm mr-1" v-b-modal.modalvotacion v-if="loggedIn">Ingresar a votación</button>
+            <router-link to="/crearvotacion"><b-button  size="sm" class="my-2 my-sm-0" v-if="loggedIn">Crear votación</b-button></router-link>
           </b-nav-form>
-          <div class="user-nav" v-if="Usuario">
-            <b-nav-item-dropdown :text="Usuario" right>
-              <b-dropdown-item fixed="top" href="#">
+          <div class="user-nav" v-if="loggedIn">
+            <b-nav-item-dropdown  right>
+              <!-- <b-dropdown-item fixed="top" href="#">
                 <b-icon icon="person-circle"></b-icon>Perfil
-              </b-dropdown-item>
-              <b-dropdown-item fixed="top" href="#">
+              </b-dropdown-item> -->
+              <b-dropdown-item fixed="top" href="#" @click="logOut">
                 <b-icon icon="box-arrow-in-left"></b-icon>Salir
               </b-dropdown-item>
             </b-nav-item-dropdown>
@@ -60,7 +60,7 @@
         </b-navbar-nav>
       </div>
     </b-navbar>
-    <IngresoVotacionModal></IngresoVotacionModal>
+    <IngresoVotacionModal ok-title="ir a votación" />
   </div>
 </template>
 
@@ -74,13 +74,24 @@ export default {
   },
   data: function() {
     return {
-      Usuario: 'Prueba'
     };
   },
   methods:{
-    toHome(){
-      this.$router.push({ path: '/' });
+    logOut(){
+      this.$store.dispatch('destroyToken')
+        .then(() =>{
+          this.$router.push('/login')
+        })
+        .catch(() => {
+          this.$router.push('/login')
+        })
     }
+  },
+  computed:{
+    loggedIn(){
+      return this.$store.getters.loggedIn
+    }
+    
   }
 };
 </script>

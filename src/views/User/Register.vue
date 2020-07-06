@@ -6,13 +6,25 @@
           <div class="col-10 p-3 border">
               <FormularioRegistro @datosRegistro="captardatosregistro"></FormularioRegistro>
           </div>
+          <div class="alert alert-success" v-if="registrado">
+              usuario registrado existosamente
+              
+          </div>
+          <div class="alert alert-danger mt-4" v-if="error">
+              <p v-if="camposExistentes[0]"> {{camposExistentes[0].err}}</p>
+              <br/>
+              <p v-if="camposExistentes[1]"> {{camposExistentes[1].err}}</p>
+          </div>
       </div>
-      {{usuario}}
   </div>
 </template>
 
 <script>
+import {Service} from '../../service/Service'
+
 import FormularioRegistro from '@/components/Registro/Formulario.vue'
+
+const service = new Service()
 
 export default {
     name:'Register',
@@ -27,21 +39,38 @@ export default {
                 correo:null,
                 pass:null,
                 rut:null
-            }
+            },
+            registrado: false,
+            error: false,
+            camposExistentes: []
         }
     },
     methods:{
         captardatosregistro(nombres,apellidos,correo,pass,rut){
             const captador={
-                nombres:nombres,
-                apellidos:apellidos,
-                correo:correo,
-                pass:pass,
+                nombre:nombres,
+                apellido:apellidos,
+                mail:correo,
+                contrasena:pass,
                 rut:rut
             };
             this.usuario = captador;
 
-            console.log(this.usuario);
+           service.registrarse(this.usuario).
+           then(res => {
+               this.registrado = true
+               this.error = false
+                this.$router.push('/login')
+
+               
+               console.log(res)
+           }).
+           catch(err => {
+               this.error = true
+               this.registrado = false
+               this.camposExistentes = err.response.data.camposExistentes
+               console.log('errrorrr')
+           })
 
         }
     }
