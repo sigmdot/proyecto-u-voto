@@ -7,7 +7,8 @@ axios.interceptors.request.use(function (config) {
 
 
 // const URL_API = 'https://rest-api-proyecto-soft.herokuapp.com'
-const URL_API = 'http://localhost:3000'
+/* const URL_API = 'http://localhost:3000' */
+const URL_API = 'http://ec2-18-231-198-225.sa-east-1.compute.amazonaws.com/api'
 // const PROXY_URL = 'https://cors-proxy-rest-api.herokuapp.com'
 // const URL_API = 'http://localhost:4040'
 export class Service {
