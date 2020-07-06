@@ -3,7 +3,7 @@
     
       <div class="is-hidden-mobile">
         <HeaderLista></HeaderLista>
-        <div class="row m-0">
+        <div class="row m-0 mt-3">
           <VotacionItemPC></VotacionItemPC>
           <VotacionItemPC></VotacionItemPC>
           <VotacionItemPC></VotacionItemPC>
@@ -12,7 +12,6 @@
           <VotacionItemPC></VotacionItemPC>
           <VotacionItemPC></VotacionItemPC>
         </div>
-        
       </div>
       <div class="is-hidden-pc">
           <h4>Votaciones</h4>
@@ -21,7 +20,6 @@
             <VotacionItemMobile></VotacionItemMobile>
             <VotacionItemMobile></VotacionItemMobile>
             <VotacionItemMobile></VotacionItemMobile>
-
           </div>
         </div>
     

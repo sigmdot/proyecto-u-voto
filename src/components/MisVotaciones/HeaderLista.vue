@@ -3,9 +3,9 @@
     <div class="col-lg-5 border-right p-0 text-center">Titulo votacion</div>
     <div class="col-lg border-right p-0 text-center">Respuestas</div>
     <div class="col-lg border-right p-0 text-center">Analizar</div>
-    <div class="col-lg border-right p-0 text-center">Compartir</div>
+    <div class="col-lg border-right p-1 text-center">Compartir</div>
     <div class="col-lg border-right p-0 text-center">Exportar</div>
-    <div class="col-lg border-right p-0 text-center">Eliminar</div>
+    <div class="col-lg  p-0 text-center">Eliminar</div>
   </div>
 </template>
 
