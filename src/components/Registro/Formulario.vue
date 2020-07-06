@@ -1,7 +1,7 @@
 <template>
   <form class="formularioregistro" @submit="checkForm">
     <div class="form-group">
-      <label for="Nombreyapellido">Nombres:</label>
+      <label for="Nombreyapellido">Nombre:</label>
       <input
         type="text"
         class="form-control"
@@ -11,7 +11,7 @@
       />
     </div>
     <div class="form-group">
-      <label for="Nombreyapellido">Apellidos:</label>
+      <label for="Nombreyapellido">Apellido:</label>
       <input
         type="text"
         class="form-control"
@@ -28,16 +28,6 @@
         id="Email"
         aria-describedby="Nombreyapellido"
         v-model="correo"
-      />
-    </div>
-    <div class="form-group">
-      <label for="Email">Re-ingresar correo electronico:</label>
-      <input
-        type="email"
-        class="form-control"
-        id="Email"
-        aria-describedby="Nombreyapellido"
-        v-model="valicorreo"
       />
     </div>
     <div class="form-group">
@@ -77,7 +67,7 @@ export default {
   },
   methods: {
     checkForm: function(e) {
-      
+      console.log(this.nombres,this.apellidos,this.correo,this.pass,this.rut)
       const h = this.$createElement;
       const vNodesTitle = h(
         "div",
@@ -85,16 +75,9 @@ export default {
         [h("strong", { class: "mr-2" }, "Atención")]
       );
 
-      if (this.correo) {
-        if (this.valicorreo) {
-          if (this.correo.localeCompare(this.valicorreo) === 0) {
-            this.boolcorreo = true;
-          }
-          else{
-            this.boolcorreo = false;
-          }
-        }
-      }
+      
+      this.boolcorreo = true;
+         
       if (this.pass) {
         if (this.validapass) {
           if (this.pass.localeCompare(this.validapass) === 0) {
@@ -148,29 +131,30 @@ export default {
           variant: "warning"
         });
       }
-      if (!this.valicorreo) {
+  
+      if (!this.boolcorreo) {
         const vNodesMsg = h("p", { class: ["text-center", "mb-0"] }, [
           h("strong"),
-          ` Requerida validación `
+          ` Correos no coinciden `
         ]);
         this.$bvToast.toast([vNodesMsg], {
           title: [vNodesTitle],
           solid: true,
           variant: "warning"
         });
-      } else {
-        if (!this.boolcorreo) {
-          const vNodesMsg = h("p", { class: ["text-center", "mb-0"] }, [
-            h("strong"),
-            ` Correos no coinciden `
-          ]);
-          this.$bvToast.toast([vNodesMsg], {
-            title: [vNodesTitle],
-            solid: true,
-            variant: "warning"
-          });
-        }
       }
+      if (this.pass.length < 6 || this.pass.length > 15  || this.validapass.length < 6 || this.validapass.length >15 ) {
+        const vNodesMsg = h("p", { class: ["text-center", "mb-0"] }, [
+          h("strong"),
+          ` la contraseña debee tener entre 6 y 15 caracteres `
+        ]);
+        this.$bvToast.toast([vNodesMsg], {
+          title: [vNodesTitle],
+          solid: true,
+          variant: "warning"
+        });
+      }
+      
       if(!this.pass){
         const vNodesMsg = h("p", { class: ["text-center", "mb-0"] }, [
           h("strong"),

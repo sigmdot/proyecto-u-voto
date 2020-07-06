@@ -8,13 +8,17 @@
     <div class="form-group">
       <label for="password">Contraseña:</label>
       <input type="password" class="form-control" id="password" v-model="pass" />
-      {{pass}}
+      
     </div>
     <!-- <div class="form-group form-check">
       <input type="checkbox" class="form-check-input" id="exampleCheck1" />
       <label class="form-check-label" for="exampleCheck1">Recuerdáme!</label>
     </div>-->
+
     <button type="submit" class="btn btn-primary">Entrar</button>
+    <div v-if="errorCredenciales" class="alert alert-danger mt-4 py-4"> 
+          {{mensajeError}}
+        </div>
   </form>
 </template>
 
@@ -24,11 +28,14 @@ export default {
   data: function() {
     return {
       correo: null,
-      pass: null
+      pass: null,
+      errorCredenciales: false,
+      mensajeError: ''
     };
   },
   methods: {
     checkForm:function(e) {
+      e.preventDefault();
       const h = this.$createElement;
       const vNodesTitle = h(
         "div",
@@ -37,6 +44,20 @@ export default {
       );
 
       if (this.correo && this.pass) {
+
+        this.$store.dispatch('login',{
+          mail: this.correo,
+          contrasena: this.pass
+        }).
+          then(() =>{
+            this.$router.push('/')
+            this.errorCredenciales = false
+          }).
+          catch(err =>{
+            this.errorCredenciales = true
+            this.mensajeError = err.response.data.msg
+          })
+
         return true;
       }
       if (!this.correo) {
@@ -61,7 +82,7 @@ export default {
           variant: "warning"
         });
       }
-      e.preventDefault();
+      
     }
   }
 };
