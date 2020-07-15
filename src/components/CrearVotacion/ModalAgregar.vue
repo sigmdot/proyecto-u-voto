@@ -19,15 +19,20 @@
       </div>
     </form>
     <ul class="list-group mt-3 mb-3">
-        <li v-for="(item,index) in respuestas" :key="index" class="list-group-item d-flex justify-content-between align-items-center">
-            <p class="p-0 m-0 flex-grow-1">{{item}}</p> 
-            <button class="btn btn-danger" @click="eliminarRespuesta(index)"> <b-icon icon="x-circle"></b-icon> </button>
-        </li>
+      <li
+        v-for="(item,index) in respuestas"
+        :key="index"
+        class="list-group-item d-flex justify-content-between align-items-center"
+      >
+        <p class="p-0 m-0 flex-grow-1">{{item}}</p>
+        <button class="btn btn-danger" @click="eliminarRespuesta(index)">
+          <b-icon icon="x-circle"></b-icon>
+        </button>
+      </li>
     </ul>
-    <button class="btn btn-success w-100" @click="enviarPregunta"> Agregar pregunta </button>
-   <button  class="btn btn-outline-danger w-100 mt-1">Cancelar</button>
+    <button class="btn btn-success w-100" @click="enviarPregunta">Agregar pregunta</button>
+    <button class="btn btn-outline-danger w-100 mt-1">Cancelar</button>
   </b-modal>
-  
 </template>
 
 <script>
@@ -36,38 +41,62 @@ export default {
   components: {},
   data: function() {
     return {
-        itemrespu:null,
-        nombrePregunta:null,
-        respuestas:[]
+      itemrespu: null,
+      nombrePregunta: null,
+      respuestas: []
     };
   },
-  methods:{
-      pushRespuesta(){
-          if(this.itemrespu){
-            this.respuestas.push(this.itemrespu);
-            this.itemrespu = null;
-            
-          }
-          else{
-              console.log('NO NO NO NO NO SEÑOR');
-          }
-          
-      },
-      eliminarRespuesta(i){
-          this.respuestas.splice(i,1);
-      },
-      enviarPregunta(){
-          if(this.nombrePregunta && ((this.respuestas.length) != 0)){
-              this.$emit('preguntacompleta',this.respuestas,this.nombrePregunta);
-              this.nombrePregunta = null;
-              this.respuestas = [];
-              this.$bvModal.hide('my-modal');
-          }
-          else{
-              console.log('NO NO NO CRISTO NO');
-          }
-          
+  methods: {
+    pushRespuesta() {
+      if (this.itemrespu) {
+        this.respuestas.push(this.itemrespu);
+        this.itemrespu = null;
+      } else {
+        console.log("NO NO NO NO NO SEÑOR");
       }
+    },
+    eliminarRespuesta(i) {
+      this.respuestas.splice(i, 1);
+    },
+    enviarPregunta() {
+      if (this.nombrePregunta && this.respuestas.length > 1) {
+        this.$emit("preguntacompleta", this.respuestas, this.nombrePregunta);
+        this.nombrePregunta = null;
+        this.respuestas = [];
+        this.$bvModal.hide("my-modal");
+      } else {
+        const h = this.$createElement;
+          const vNodesTitle = h(
+            "div",
+            {
+              class: ["d-flex", "flex-grow-1", "align-items-baseline", "mr-2"]
+            },
+            [h("strong", { class: "mr-2" }, "Atención")]
+          );
+        if (this.respuestas.length <= 1) {
+          const vNodesMsg = h("p", { class: ["text-center", "mb-0"] }, [
+            h("strong"),
+            ` Es requerido más de una respuesta `
+          ]);
+          this.$bvToast.toast([vNodesMsg], {
+            title: [vNodesTitle],
+            solid: true,
+            variant: "warning"
+          });
+        }
+        if(!this.nombrePregunta){
+          const vNodesMsg = h("p", { class: ["text-center", "mb-0"] }, [
+            h("strong"),
+            ` Es requerido el nombre `
+          ]);
+          this.$bvToast.toast([vNodesMsg], {
+            title: [vNodesTitle],
+            solid: true,
+            variant: "warning"
+          });
+        }
+      }
+    }
   }
 };
 </script>
