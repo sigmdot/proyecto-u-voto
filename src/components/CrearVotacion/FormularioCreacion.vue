@@ -1,19 +1,18 @@
 <template>
   <div class="formulariocreacion col-12 col-lg-10 p-3 border">
-    <b-form @submit="checkForm">
-      <div class="form-group">
-        <label for="nombrevotacion">Nombre votación:</label>
+    <form @submit="checkForm">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Nombre votación</span>
+        </div>
         <input
           type="text"
-          class="form-control"
+          class="form-control w-80"
+          style="width:82%"
           id="nombrevotacion"
           aria-describedby="nombrevotacionhelp"
           v-model="nombrevotacion"
         />
-        <small
-          id="emailHelp"
-          class="form-text text-muted"
-        >Ejemplo : Elección panes estudiantiles 2020</small>
       </div>
       <hr/>
       <div class="form-group">
@@ -64,12 +63,18 @@
           <b-icon icon="plus-circle-fill"></b-icon>
         </div>
         <div class="col p-0 pl-1">
-            <p>Agregar una pregunta</p>
+          <p>Agregar una pregunta</p>
         </div>
       </div>
 
-      <div v-for="(pregunta,i) in preguntas" class="form-group border rounded p-3 bg-light" :key="i">
-        <label> <strong> {{pregunta.nombre}} </strong> </label>
+      <div
+        v-for="(pregunta,i) in preguntas"
+        class="form-group border rounded p-3 bg-light"
+        :key="i"
+      >
+        <label>
+          <strong>{{pregunta.nombre}}</strong>
+        </label>
         <div
           v-for="(respuesta,j) in pregunta.respuestas"
           :key="j"
@@ -82,9 +87,12 @@
             class="custom-control-input"
             disabled
           />
-          <label class="custom-control-label" for="customRadio1"> {{respuesta}}</label>
+          <label class="custom-control-label" for="customRadio1">{{respuesta}}</label>
         </div>
-        <div class="btn btn-outline-danger w-100 mt-3 w-100" @click="borrarpregunta(i)">Borrar pregunta</div>
+        <div
+          class="btn btn-outline-danger w-100 mt-3 w-100"
+          @click="borrarpregunta(i)"
+        >Borrar pregunta</div>
       </div>
       <button type="submit" class="btn btn-primary w-100" @click="logCrear">Crear votación</button>
     </b-form>
@@ -103,6 +111,11 @@ export default {
     ModalAgregar
   },
   data: function() {
+    const now = new Date()
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+      // 15th two months prior
+      const minDate = new Date(today)
+      minDate.setMonth(minDate.getMonth())
     return {
       preguntas: [],
       tipo:'privada',
@@ -171,8 +184,8 @@ export default {
       };
       this.preguntas.push(pregunta);
     },
-    borrarpregunta(index){
-      this.preguntas.splice(index,1);
+    borrarpregunta(index) {
+      this.preguntas.splice(index, 1);
     }
   }
 };
