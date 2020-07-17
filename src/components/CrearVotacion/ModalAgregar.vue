@@ -25,7 +25,7 @@
         </li>
     </ul>
     <button class="btn btn-success w-100" @click="enviarPregunta"> Agregar pregunta </button>
-   <button  class="btn btn-outline-danger w-100 mt-1">Cancelar</button>
+   <button  class="btn btn-outline-danger w-100 mt-1" @click="esconderModal">Cancelar</button>
   </b-modal>
   
 </template>
@@ -57,7 +57,7 @@ export default {
           this.respuestas.splice(i,1);
       },
       enviarPregunta(){
-          if(this.nombrePregunta && ((this.respuestas.length) != 0)){
+          if(this.nombrePregunta && ((this.respuestas.length) > 1)){
               this.$emit('preguntacompleta',this.respuestas,this.nombrePregunta);
               this.nombrePregunta = null;
               this.respuestas = [];
@@ -67,6 +67,12 @@ export default {
               console.log('NO NO NO CRISTO NO');
           }
           
+      },
+      esconderModal(){
+        this.$bvModal.hide('my-modal');
+        this.itemrespu = null
+        this.nombrePregunta = null
+        this.respuestas = []
       }
   }
 };

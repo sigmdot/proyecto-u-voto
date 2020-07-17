@@ -5,7 +5,7 @@
               <h3>Crear una votación</h3>
               <p>Para crear una votación, rellene los datos que acontinuación se les solicita.</p>
           </div>
-          <FormularioCreacion @votacion="recibido"></FormularioCreacion>
+          <FormularioCreacion @votacion="recibido" v-if="!votacionCreada"></FormularioCreacion>
 
           <div v-if="votacionCreada" class="alert alert-success mt-4" role="alert">
             <h5 class="alert-heading">Votacion Creada!</h5>
@@ -42,11 +42,13 @@ export default {
         }
     },
     methods:{
-        recibido(nombrevotacion,tipo,preguntas){
+        recibido(nombrevotacion,tipo,preguntas,fechaInicio,fechaTermino){
             const votacionn ={
                 nombre: nombrevotacion,
                 type: tipo,
-                preguntaVotacion:preguntas
+                preguntaVotacion:preguntas,
+                fechaInicio: fechaInicio,
+                fechaTermino: fechaTermino
             }
             this.votacion = votacionn;
             service.crearVotacion(this.votacion).

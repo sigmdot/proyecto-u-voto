@@ -4,15 +4,17 @@
       <router-link to="/"><b-navbar-brand class="is-hidden-mobile mouseoverja" >DigiVote</b-navbar-brand></router-link> 
       <div class="left">
         <div class="is-hidden-mobile">
-          <!-- <b-navbar-nav class="mr-auto">
-            <b-nav-item class="hover-effect" v-if="loggedIn">
+          <b-navbar-nav class="mr-auto">
+            <!-- <b-nav-item class="hover-effect" v-if="loggedIn">
               <router-link class="color-link" to="/dashboard">Dashboard</router-link>
-            </b-nav-item>
-            <b-nav-item class="hover-effect" v-if="loggedIn">
-              <router-link class="color-link" to="/misvotaciones">Mis votaciones</router-link>
-            </b-nav-item>
+            </b-nav-item> -->
+             <router-link class="color-link" to="/misvotaciones">
+              <b-nav class="hover-effect" v-if="loggedIn">
+                Mis votaciones
+              </b-nav>
+            </router-link>
             <b-nav-item></b-nav-item>
-          </b-navbar-nav> -->
+          </b-navbar-nav> 
         </div>
         <div class="is-hidden-pc">
           <!-- <b-navbar-brand href="#"></b-navbar-brand> Cuando se tenga el logo en chico-->
@@ -21,34 +23,35 @@
             <b-navbar-nav>
               <!-- <b-nav-item v-if="loggedIn">
                 <b-icon icon="kanban-fill" rotate="270"></b-icon>
-                <router-link to="/dashboard">Dashboard</router-link>
-              </b-nav-item>
+                <router-link to="/dashboard" class="pl-1 text-white">Dashboard</router-link>
+              </b-nav-item> -->
+    
               <b-nav-item v-if="loggedIn">
                 <b-icon icon="receipt-cutoff"></b-icon>
-                <router-link to="/misvotaciones">Mis votaciones</router-link>
-              </b-nav-item> -->
-              <!-- <b-nav-item v-if="!loggedIn">
-                <router-link  to="/login"><a class="btn btn-secondary btn-sm">Entrar</a></router-link>
+                <router-link to="/misvotaciones" class="text-white pl-2">Mis votaciones</router-link>
+              </b-nav-item> 
+              <b-nav-item v-if="loggedIn">
+                <button type="button" class="btn btn-success btn-sm mr-1" v-b-modal.modalvotacion v-if="loggedIn">Ingresar a votación</button>
               </b-nav-item>
-              <b-nav-item v-if="!loggedIn">
-                <router-link  to="/registro"><a class="btn btn-primary btn-sm">Registrarse</a></router-link>
-              </b-nav-item> -->
+              <b-nav-item v-if="loggedIn">
+                <router-link to="/crearvotacion"><b-button  size="sm" class="my-2 my-sm-0" v-if="loggedIn">Crear votación</b-button></router-link>
+              </b-nav-item>
             </b-navbar-nav>
           </b-collapse>
         </div>
       </div>
-      <div class="right ml-auto">
+      <div class="right ml-auto  ">
         <b-navbar-nav>
           <b-nav-form >
-            <button type="button" class="btn btn-success btn-sm mr-1" v-b-modal.modalvotacion v-if="loggedIn">Ingresar a votación</button>
-            <router-link to="/crearvotacion"><b-button  size="sm" class="my-2 my-sm-0" v-if="loggedIn">Crear votación</b-button></router-link>
+            <button v-if="loggedIn" type="button" class="btn btn-success btn-sm mr-1 is-hidden-mobile" v-b-modal.modalvotacion >Ingresar a votación</button>
+            <router-link v-if="loggedIn" to="/crearvotacion"><b-button  size="sm" class="my-2 my-sm-0 is-hidden-mobile" >Crear votación</b-button></router-link>
           </b-nav-form>
           <div class="user-nav" v-if="loggedIn">
             <b-nav-item-dropdown  right>
               <!-- <b-dropdown-item fixed="top" href="#">
                 <b-icon icon="person-circle"></b-icon>Perfil
               </b-dropdown-item> -->
-              <b-dropdown-item fixed="top" href="#" @click="logOut">
+              <b-dropdown-item fixed="top" @click="logOut">
                 <b-icon icon="box-arrow-in-left"></b-icon>Salir
               </b-dropdown-item>
             </b-nav-item-dropdown>
@@ -92,7 +95,7 @@ export default {
       return this.$store.getters.loggedIn
     }
     
-  }
+  },
 };
 </script>
 

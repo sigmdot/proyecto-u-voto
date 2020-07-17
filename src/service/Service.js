@@ -7,8 +7,8 @@ axios.interceptors.request.use(function (config) {
 
 
 // const URL_API = 'https://rest-api-proyecto-soft.herokuapp.com'
-/* const URL_API = 'http://localhost:3000' */
-const URL_API = 'http://ec2-18-231-198-225.sa-east-1.compute.amazonaws.com/api'
+const URL_API = 'http://localhost:3000'
+// const URL_API = 'http://ec2-18-231-198-225.sa-east-1.compute.amazonaws.com/api'
 // const PROXY_URL = 'https://cors-proxy-rest-api.herokuapp.com'
 // const URL_API = 'http://localhost:4040'
 export class Service {
@@ -16,7 +16,6 @@ export class Service {
   }
 
   login (usuario) {
-
     const url = `${URL_API}/usuarios/login`
     return axios.post(url,usuario).then(response => response.data)
   }
@@ -26,10 +25,7 @@ export class Service {
     return axios.post(url,votacion).then(response => response.data)
   }
 
-  getVotacion(idVotacion){
-
-
-    
+  getVotacion(idVotacion){    
     const url = `${URL_API}/votaciones/${idVotacion}`
     return axios.get(url).then(response => response.data)
   }
@@ -42,4 +38,15 @@ export class Service {
     const url = `${URL_API}/usuarios/signup`
     return axios.post(url,usuario).then(response => response.data)
   }
+
+  getVotacionesUsuario(){
+    const url = `${URL_API}/usuarios/votaciones`
+    return axios.get(url).then(response => response.data)
+  }
+
+  getResultadosVotacion(idVotacion){
+    const url = `${URL_API}/votaciones/${idVotacion}/resultados`
+    return axios.get(url).then(response => response.data)
+  }
+
 }

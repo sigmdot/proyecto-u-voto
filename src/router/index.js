@@ -88,9 +88,12 @@ Vue.use(VueRouter)
     ] 
   },
   {
-    path: '/resultados',
+    path: '/resultados/:idVotacion',
     name: 'Resultados',
-    component: ResultadoVotacion
+    component: ResultadoVotacion,
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
 

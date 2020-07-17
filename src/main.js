@@ -3,6 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import VueQrcodeReader from "vue-qrcode-reader";
+import VueCountdown from '@chenfengyuan/vue-countdown';
+
+Vue.component(VueCountdown.name, VueCountdown);
  
 Vue.use(VueQrcodeReader);
 

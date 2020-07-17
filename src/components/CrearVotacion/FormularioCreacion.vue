@@ -1,6 +1,6 @@
 <template>
   <div class="formulariocreacion col-12 col-lg-10 p-3 border">
-    <form @submit="checkForm">
+    <b-form @submit="checkForm">
       <div class="form-group">
         <label for="nombrevotacion">Nombre votación:</label>
         <input
@@ -15,7 +15,42 @@
           class="form-text text-muted"
         >Ejemplo : Elección panes estudiantiles 2020</small>
       </div>
-
+      <hr/>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-12">
+            <label for="fecha-inicio">Fecha y hora inicio:</label>
+          </div>
+          <div class="col-lg-6 col-sm-12 p-lg-0 pl-lg-3 ">
+            <b-form-datepicker dropleft placeholder="Ingrese una fecha" v-model="fechaInicio.fecha"  id="fecha-inicio" class="mb-2"></b-form-datepicker>
+          </div>
+          <div class="col-lg-6  col-sm-12 pr-lg-3">
+            <b-form-timepicker placeholder="Ingrese una hora" v-model="fechaInicio.hora" label-close-button="aceptar"></b-form-timepicker>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-12">
+            <label for="fecha-termino">Fecha y hora término:</label>
+          </div>
+          <div class="col-lg-6 col-sm-12 p-lg-0 pl-lg-3 ">
+            <b-form-datepicker dropleft placeholder="Ingrese una fecha" v-model="fechaTermino.fecha" id="fecha-termino" class="mb-2"></b-form-datepicker>
+          </div>
+          <div class="col-lg-6  col-sm-12 pr-lg-3">
+            <b-form-timepicker placeholder="Ingrese una hora" v-model="fechaTermino.hora" label-close-button="aceptar"></b-form-timepicker>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div v-if="fechaInicioAntesDeFechaActual" class="alert alert-danger">
+        La fecha y hora de inicio de la votación no puede ser menor a la fecha y hora actual
+        <hr/>
+      </div>
+      <div v-if="fechaTerminoAntesDeFechaInicio" class="alert alert-danger">
+        La fecha y hora de termino de la votación no puede ser menor a la fecha y hora de inicio de la votación
+        <hr/>
+      </div>
       <!-- <div class="form-group">
         <label for="exampleFormControlSelect1" >Tipo de elección:</label>
         <select class="form-control" id="exampleFormControlSelect1" v-model="tipo">
@@ -52,13 +87,15 @@
         <div class="btn btn-outline-danger w-100 mt-3 w-100" @click="borrarpregunta(i)">Borrar pregunta</div>
       </div>
       <button type="submit" class="btn btn-primary w-100" @click="logCrear">Crear votación</button>
-    </form>
+    </b-form>
     <ModalAgregar id="my-modal" @preguntacompleta="preguntaCaptada"></ModalAgregar>
   </div>
 </template>
 
 <script>
 import ModalAgregar from "./ModalAgregar";
+
+import moment from 'moment';
 
 export default {
   name: "FormularioCreacion",
@@ -69,7 +106,17 @@ export default {
     return {
       preguntas: [],
       tipo:'privada',
-      nombrevotacion:null
+      nombrevotacion:null,
+      fechaInicio: {
+        fecha: null,
+        hora: null
+      },
+      fechaTermino: {
+        fecha: null,
+        hora: null
+      },
+      fechaInicioAntesDeFechaActual: false,
+      fechaTerminoAntesDeFechaInicio: false
     };
   },
   methods: {
@@ -77,6 +124,9 @@ export default {
       console.log(this.preguntas)
       console.log(this.tipo)
       console.log(this.nombrevotacion)
+      // console.log(this.fechaInicio)
+      console.log(moment(this.fechaInicio.fecha + ' ' + this.fechaInicio.hora).isAfter(new Date(),'minute'))
+      console.log(new Date())
     },
     showModal() {
       this.$refs["my-modal"].show();
@@ -85,13 +135,34 @@ export default {
       this.$refs["my-modal"].hide();
     },
     checkForm(e) {
-      if(this.nombrevotacion && (this.preguntas.length != 0) && this.tipo){
-        this.$emit('votacion',this.nombrevotacion,this.tipo,this.preguntas);
+      e.preventDefault();
+      let fechaInicio = this.fechaInicio.fecha + ' ' + this.fechaInicio.hora 
+      let fechaTermino = this.fechaTermino.fecha + ' ' + this.fechaTermino.hora 
+      console.log(fechaInicio)
+      console.log(fechaTermino)
+
+      if(this.nombrevotacion && (this.preguntas.length != 0) && this.tipo && this.fechaInicio.fecha && this.fechaInicio.hora && this.fechaTermino.fecha && this.fechaTermino.hora){
+        if(moment(this.fechaInicio.fecha + ' ' + this.fechaInicio.hora).isBefore(new Date(), 'minute')){
+          console.log('fecha inicio anterior a fecha y hora actual')
+          this.fechaInicioAntesDeFechaActual = true
+          this.fechaTerminoAntesDeFechaInicio = false
+          return
+        }
+        if(moment(this.fechaInicio.fecha + ' ' + this.fechaInicio.hora).isAfter(this.fechaTermino.fecha + ' ' + this.fechaTermino.hora, 'minute')){
+          this.fechaTerminoAntesDeFechaInicio = true
+          this.fechaInicioAntesDeFechaActual = false
+          console.log('fecha de termino anterior a fecha inicio')
+          return
+        }
+         this.fechaInicioAntesDeFechaActual = false
+         this.fechaInicioAntesDeFechaActual = false
+
+        this.$emit('votacion',this.nombrevotacion,this.tipo,this.preguntas,fechaInicio,fechaTermino);
         this.nombrevotacion = null;
         this.preguntas = [];
         // this.tipo = null;
       }
-      e.preventDefault();
+      
     },
     preguntaCaptada(respuestas, nombrePregunta) {
       const pregunta = {

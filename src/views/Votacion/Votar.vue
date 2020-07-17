@@ -1,19 +1,32 @@
 <template>
     <div>
-      <div v-if="!votacionEnviada">
+      <div v-if="!votacionEnviada && tiempoRestante != 0 ">
         <div class="row m-0" v-if="votacion !== null && votacion !== 'no'">
             <div class="col-12 p-0 text-center">
                 <h4>{{votacion.titulo}}</h4>
             </div>
             <form class="col-12 p-0">
+                <div class="row">
+                  <div class="col-lg-8 col-sm-12">
+                    <div v-for="(pregunta,i) in votacion.preguntas" :key="i" v-bind:id="i" class="form-group border rounded p-3 bg-light">
+                      <label>
+                          <strong>{{pregunta.texto_pregunta}}</strong>
+                      </label>
+                      <b-form-radio   v-for="(resp,j) in pregunta.respuestas" :key="j" v-model="selected[i].selected" v-bind:name="pregunta.texto_pregunta" v-bind:value="resp">{{resp.respuesta}}</b-form-radio>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-sm-12 form-group border rounded p-3 bg-light">
+                    <h6>la votación se cierra en :</h6>
+                    <countdown :time="tiempoRestante" style="font-weight:400">
+                      <template  slot-scope="props">{{ props.days != 1 ?  props.days + ' días ' :  props.days + ' día '}}, {{ props.hours != 1 ? props.hours + ' horas' : props.hours + ' hora' }} , {{ props.minutes }} minutos, {{ props.seconds }} segundos.</template>
+                    </countdown>
+
+                  </div>
+
+                </div>
                 <!-- <Preguntas></Preguntas>    Componente listo    -->
                 <!-- NO VI ESTE COMPONENETE WN, lo vi cuando ya había hecho la wea así nomas-->
-                <div v-for="(pregunta,i) in votacion.preguntas" :key="i" v-bind:id="i" class="form-group border rounded p-3 bg-light">
-                <label>
-                    <strong>{{pregunta.texto_pregunta}}</strong>
-                </label>
-                <b-form-radio   v-for="(resp,j) in pregunta.respuestas" :key="j" v-model="selected[i].selected" v-bind:name="pregunta.texto_pregunta" v-bind:value="resp">{{resp.respuesta}}</b-form-radio>
-                </div>
+                
             </form>
             <button class="btn btn-dark mx-1" type="button" @click="votar"> Votar </button>
             <!-- <button class="btn btn-primary" type="button" v-b-modal.modal-1> Abrir validación </button>
@@ -25,6 +38,9 @@
       </div>
       <div v-if="votacionEnviada" class="alert alert-success">
         Votacion Enviada
+      </div>
+      <div v-if="tiempoRestante <= 0" class="alert alert-success">
+        La votación se ha cerrado
       </div>
     </div>
   
@@ -50,17 +66,26 @@ export default {
       votacionHecha: {},
       selected: [],
       votacionEnviada: false,
-      mensajeError: ''
+      mensajeError: '',
+      tiempoRestante: null
     };
   },
   methods: {
     obtenerVotacion(id){
-      console.log(localStorage.getItem('acces_token'))
       service.getVotacion(id).
         then(res => {
 
           this.votacion = res
+          console.log(this.votacion)
           this.selected = []
+
+          let ahora = new Date();
+          let fechaTermino = new Date(this.votacion.fecha_termino)
+         
+          this.tiempoRestante = fechaTermino - ahora
+          console.log(this.tiempoRestante)
+          console.log(this.tiempoRestante)
+
           for(let i = 0; i < this.votacion.preguntas.length ; i++){
             this.selected.push({
               selected: null
@@ -125,6 +150,8 @@ export default {
     const codigoVotacion = this.$route.params.id
     this.obtenerVotacion(codigoVotacion)
     this.votacionEnviada = false
+
+    
 
   },
   watch :{
